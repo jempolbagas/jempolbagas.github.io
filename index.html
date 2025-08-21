@@ -85,16 +85,32 @@
         <section id="services">
             <div class="container">
                 <h2 class="section-title">Tutoring Services</h2>
+                <!-- In index.html, update the .services-grid -->
                 <div class="services-grid">
-                    <div class="service-card">
+                    <!-- Card 1 -->
+                    <div class="service-card glass-card">
+                        <div class="service-icon">
+                            <!-- Icon: Calculator for Math -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="8" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="16" y2="21"></line><line x1="3" y1="8" x2="21" y2="8"></line><line x1="3" y1="16" x2="21" y2="16"></line></svg>
+                        </div>
                         <h3 class="service-title">Matematika</h3>
                         <p class="service-description">SMP & SMA Level</p>
                     </div>
-                    <div class="service-card">
+                    <!-- Card 2 -->
+                    <div class="service-card glass-card">
+                        <div class="service-icon">
+                            <!-- Icon: Atom for Science -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12s4.48 10 10 10s10-4.48 10-10z"></path><path d="M12 2v20"></path><path d="M21.17 8.83l-3.54 3.54"></path><path d="M6.37 15.63l-3.54 3.54"></path><path d="M21.17 15.17l-3.54-3.54"></path><path d="M6.37 8.37l-3.54-3.54"></path></svg>
+                        </div>
                         <h3 class="service-title">Fisika & Kimia (IPA)</h3>
                         <p class="service-description">SMA Level (Dasar-dasar Biologi juga tersedia)</p>
                     </div>
-                    <div class="service-card">
+                    <!-- Card 3 -->
+                    <div class="service-card glass-card">
+                        <div class="service-icon">
+                            <!-- Icon: Message Circle for English -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        </div>
                         <h3 class="service-title">English (Conversational)</h3>
                         <p class="service-description">SMP & SMA Level</p>
                     </div>
@@ -143,7 +159,7 @@
             <div class="container contact-container">
                 <h2 class="section-title">Let's Start Learning!</h2>
                 <p class="contact-text">Ready to build confidence and master new subjects? Reach out to schedule your first session or to ask any questions you might have.</p>
-                <form id="contact-form" class="contact-form" action="YOUR_FORMSPREE_URL" method="POST">
+                <form id="contact-form" class="contact-form" action="https://formspree.io/f/myzpqqdg" method="POST">
                     <div class="form-group">
                         <input type="text" id="name" name="name" required placeholder="Your Name">
                     </div>
@@ -153,7 +169,11 @@
                     <div class="form-group">
                         <textarea id="message" name="message" required placeholder="Your Message"></textarea>
                     </div>
-                    <button type="submit" class="btn">Send Message</button>
+                    <button type="submit" class="btn">
+                        Send Message
+                        <!-- Add the WhatsApp icon SVG inside the button -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99 0-3.903-.52-5.687-1.475L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.269.655 4.398 1.803 6.283l-1.229 4.484 4.545-1.181z"/></svg>
+                    </button>
                 </form>
             </div>
         </section>

@@ -154,7 +154,11 @@ section { padding: calc(var(--spacing-unit) * 4) 0; }
 .hero-image { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: var(--spacing-unit); border: 4px solid #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
 .hero-title { font-family: var(--font-primary); font-size: 4rem; line-height: 1.1; margin-bottom: 0.5rem; }
 .hero-tagline { font-size: 1.25rem; color: var(--color-text-secondary); margin-bottom: var(--spacing-unit); }
-.hero-socials { display: flex; gap: var(--spacing-unit); margin-top: var(--spacing-unit); }
+.hero-socials { display: flex; margin-top: var(--spacing-unit); gap: calc(var(--spacing-unit) * 1.5); /* Increase space between icons */ }
+.hero-socials .social-icon svg {
+    width: 32px; /* Increase icon size */
+    height: 32px;
+}
 
 /* About Section */
 #about { background-color: rgba(255, 255, 255, 0.3); }
@@ -166,6 +170,26 @@ section { padding: calc(var(--spacing-unit) * 4) 0; }
 .service-card { text-align: center; }
 .service-title { font-family: var(--font-primary); font-size: 1.5rem; margin-bottom: 0.5rem; }
 .service-description { color: var(--color-text-secondary); }
+.service-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1rem;
+    background-color: rgba(0, 87, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.service-icon svg {
+    width: 28px;
+    height: 28px;
+    color: var(--color-accent);
+}
+.service-description {
+    color: var(--color-text-secondary);
+    font-size: 1rem; /* Increase font size */
+    opacity: 0.9; /* Make it more legible */
+}
 
 /* Skills & Project Section */
 .skills-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: calc(var(--spacing-unit) * 2); align-items: start; }
@@ -179,6 +203,17 @@ section { padding: calc(var(--spacing-unit) * 4) 0; }
 .contact-container { max-width: 700px; margin: 0 auto; text-align: center; }
 .contact-text { margin-bottom: var(--spacing-unit); }
 .contact-form { margin-top: var(--spacing-unit); display: flex; flex-direction: column; gap: 1rem; }
+.contact-form .btn {
+    display: inline-flex; /* Use flexbox for alignment */
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem; /* Space between text and icon */
+    width: 100%;
+}
+.contact-form .btn svg {
+    width: 20px;
+    height: 20px;
+}
 .form-group input, .form-group textarea {
     width: 100%;
     padding: 1rem;
