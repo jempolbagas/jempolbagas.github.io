@@ -27,6 +27,27 @@ body {
     background-size: 25px 25px;
 }
 
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Place it behind everything */
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(0, 87, 255, 0.1), transparent 40%);
+    animation: move-glow 20s infinite alternate ease-in-out;
+}
+
+@keyframes move-glow {
+    0% {
+        transform: translate(-20%, -20%);
+    }
+    100% {
+        transform: translate(20%, 20%);
+    }
+}
+
 /* ==========================================================================
    Phase 2.1: Global Styles & Utility Classes
    ========================================================================== */
@@ -61,7 +82,8 @@ section { padding: calc(var(--spacing-unit) * 4) 0; }
 
 .glass-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.15);
+    /* The original shadow plus our new glow effect */
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.15), 0 0 20px 0 rgba(0, 87, 255, 0.2);
 }
 
 /* ==========================================================================

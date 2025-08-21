@@ -121,4 +121,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    /* ==========================================================================
+    Visual Refinement: Parallax Background
+    ========================================================================== */
+
+    gsap.to('body', {
+        backgroundPosition: '50% 100%', // Move the background from 50% 0% to 50% 100%
+        ease: 'none', // Linear movement
+        scrollTrigger: {
+            trigger: 'body',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: true // This links the animation progress directly to the scrollbar position
+        }
+});
+
 });
