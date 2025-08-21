@@ -14,6 +14,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- SVG Filter for the "Gooey" Effect -->
+    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <filter id="gooey">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="goo" />
+                <feBlend in="SourceGraphic" in2="goo" />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Add this div for our custom cursor -->
+    <div id="custom-cursor"></div>
+
     <!-- ============================================ -->
     <!--                  HEADER & NAV                -->
     <!-- ============================================ -->
@@ -89,6 +103,7 @@
                 <div class="services-grid">
                     <!-- Card 1 -->
                     <div class="service-card glass-card">
+                        
                         <div class="service-icon">
                             <!-- Icon: Calculator for Math -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="8" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="16" y2="21"></line><line x1="3" y1="8" x2="21" y2="8"></line><line x1="3" y1="16" x2="21" y2="16"></line></svg>
@@ -188,9 +203,23 @@
         </div>
     </footer>
     
-    <!-- Animation Library (GSAP) & Our Custom Script -->
+    <!-- ============================================ -->
+    <!--          LIBS & CUSTOM SCRIPT              -->
+    <!-- ============================================ -->
+
+    <!-- WebGL Library for Ripple Effect -->
+    <!-- Load this first as it's a core graphical tool -->
+    <script src="https://cdn.jsdelivr.net/npm/curtainsjs@7.2.0/dist/curtains.min.js"></script>
+
+    <!-- Animation Library (GSAP) -->
+    <!-- Load the main GSAP library first -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+    <!-- Then load its plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
+    
+    <!-- Our Custom Script -->
+    <!-- This MUST be last, as it uses all the libraries above -->
     <script src="script.js"></script>
+
 </body>
 </html>
