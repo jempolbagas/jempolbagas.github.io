@@ -1,44 +1,220 @@
 /* ==========================================================================
    Phase 0: Foundation & Design System
    ========================================================================== */
-
-/* 1. CSS Variables (Our Design System)
-   ========================================================================== */
 :root {
-    /* Color Palette */
-    --color-background: #F8F7F4; /* Soft off-white */
-    --color-text-primary: #2c2c2c;   /* Dark charcoal for readability */
-    --color-text-secondary: #5a5a5a; /* Lighter gray for subtitles */
-    --color-accent: #0057FF;         /* Vibrant blue for interaction */
+    --color-background: #F8F7F4;
+    --color-text-primary: #2c2c2c;
+    --color-text-secondary: #5a5a5a;
+    --color-accent: #0057FF;
     --color-glass-border: rgba(255, 255, 255, 0.2);
-
-    /* Typography */
     --font-primary: 'Playfair Display', serif;
     --font-secondary: 'Inter', sans-serif;
-
-    /* Spacing & Layout */
-    --spacing-unit: 1rem;
+    --spacing-unit: 1.5rem;
     --container-width: 1100px;
-    --border-radius: 12px;
+    --border-radius: 16px;
 }
 
-/* 2. Basic CSS Reset & Global Styles
-   ========================================================================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    font-size: 16px;
-    scroll-behavior: smooth;
-}
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; }
 body {
     font-family: var(--font-secondary);
     background-color: var(--color-background);
     color: var(--color-text-primary);
     line-height: 1.6;
-    overflow-x: hidden; /* Prevents horizontal scroll issues */
+    overflow-x: hidden;
+    /* Subtle geometric background pattern */
+    background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.05) 1px, transparent 0);
+    background-size: 25px 25px;
+}
+
+/* ==========================================================================
+   Phase 2.1: Global Styles & Utility Classes
+   ========================================================================== */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-unit);
+}
+
+section { padding: calc(var(--spacing-unit) * 4) 0; }
+
+.section-title {
+    font-family: var(--font-primary);
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+/* ==========================================================================
+   Phase 2.2: The Core "Glass Card" Component
+   ========================================================================== */
+.glass-card {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    border: 1px solid var(--color-glass-border);
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    padding: calc(var(--spacing-unit) * 2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.15);
+}
+
+/* ==========================================================================
+   Phase 2.3: Reusable UI Elements
+   ========================================================================== */
+.btn {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: #fff;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-secondary);
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0048d6;
+    transform: translateY(-3px);
+}
+
+.social-icon {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.social-icon:hover { color: var(--color-accent); }
+.social-icon svg { width: 28px; height: 28px; }
+
+/* ==========================================================================
+   Phase 2.4: Section-by-Section Styling
+   ========================================================================== */
+
+/* Header & Nav */
+.main-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: var(--spacing-unit) 0;
+    background: rgba(248, 247, 244, 0.8);
+    backdrop-filter: blur(10px);
+}
+.navbar { display: flex; justify-content: space-between; align-items: center; }
+.nav-logo { font-family: var(--font-primary); font-size: 1.8rem; font-weight: 700; color: var(--color-text-primary); text-decoration: none; }
+.nav-links { list-style: none; display: flex; gap: calc(var(--spacing-unit) * 1.5); }
+.nav-links a { color: var(--color-text-primary); text-decoration: none; font-weight: 500; position: relative; }
+.nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 50%; transform: translateX(-50%); background-color: var(--color-accent); transition: width 0.3s ease; }
+.nav-links a:hover::after { width: 100%; }
+.hamburger { display: none; } /* Hidden on desktop */
+.hamburger.active .hamburger-bar:nth-child(2) { opacity: 0; }
+.hamburger.active .hamburger-bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.active .hamburger-bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+.hamburger-bar { transition: all 0.3s ease-in-out; }
+
+/* Hero Section */
+#hero { padding: var(--spacing-unit) 0; text-align: center; }
+.hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.hero-image { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: var(--spacing-unit); border: 4px solid #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+.hero-title { font-family: var(--font-primary); font-size: 4rem; line-height: 1.1; margin-bottom: 0.5rem; }
+.hero-tagline { font-size: 1.25rem; color: var(--color-text-secondary); margin-bottom: var(--spacing-unit); }
+.hero-socials { display: flex; gap: var(--spacing-unit); margin-top: var(--spacing-unit); }
+
+/* About Section */
+#about { background-color: rgba(255, 255, 255, 0.3); }
+.about-content { max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.1rem; }
+.about-content p { margin-bottom: 1rem; }
+
+/* Services Section */
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-unit); }
+.service-card { text-align: center; }
+.service-title { font-family: var(--font-primary); font-size: 1.5rem; margin-bottom: 0.5rem; }
+.service-description { color: var(--color-text-secondary); }
+
+/* Skills & Project Section */
+.skills-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: calc(var(--spacing-unit) * 2); align-items: start; }
+.skills-subtitle { font-family: var(--font-primary); margin-top: var(--spacing-unit); margin-bottom: 0.8rem; font-size: 1.5rem; }
+.skills-subtitle:first-child { margin-top: 0; }
+.skills-list { list-style: none; display: flex; flex-wrap: wrap; gap: 0.7rem; }
+.skills-list li { background-color: rgba(0, 87, 255, 0.1); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 500; }
+.project-title { font-family: var(--font-primary); font-size: 1.5rem; }
+
+/* Contact Section */
+.contact-container { max-width: 700px; margin: 0 auto; text-align: center; }
+.contact-text { margin-bottom: var(--spacing-unit); }
+.contact-form { margin-top: var(--spacing-unit); display: flex; flex-direction: column; gap: 1rem; }
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    background-color: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px rgba(0, 87, 255, 0.2); }
+.form-group textarea { min-height: 150px; resize: vertical; }
+
+/* Footer */
+.main-footer { text-align: center; padding: calc(var(--spacing-unit) * 1.5) 0; background-color: #e9e7e2; }
+
+/* ==========================================================================
+   Phase 2.5: Responsive Design (Mobile-First)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .section-title { font-size: 2.2rem; }
+    .hero-title { font-size: 2.5rem; }
+
+    /* .nav-menu { display: none; } Hide menu on mobile */
+    .hamburger {
+        display: block; /* Show hamburger */
+        background: none; border: none; cursor: pointer;
+    }
+    .hamburger-bar { display: block; width: 25px; height: 3px; margin: 5px auto; background-color: var(--color-text-primary); }
+
+    .services-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+
+    .nav-menu {
+        position: absolute;
+        top: 75px; /* Position below the header */
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: rgba(248, 247, 244, 0.95); /* Slightly more opaque for readability */
+        backdrop-filter: blur(10px);
+        padding: var(--spacing-unit) 0;
+        
+        /* Hide and show logic */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    }
+
+    .nav-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+    }
 }
