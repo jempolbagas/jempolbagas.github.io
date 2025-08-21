@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bagas Aditama - Informatics & Tutoring Portfolio</title>
+
+    <!-- Google Fonts: Playfair Display (for elegant headings) & Inter (for clean body text) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Our Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ============================================ -->
+    <!--                  HEADER & NAV                -->
+    <!-- ============================================ -->
+    <header class="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="nav-logo">Bagas A.</a>
+                <div class="nav-menu">
+                    <ul class="nav-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <button class="hamburger" id="hamburger-menu" aria-label="Toggle Menu">
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- ============================================ -->
+        <!--                     HERO                     -->
+        <!-- ============================================ -->
+        <section id="hero">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <img src="assets/Bagas_Picture.webp" alt="A professional portrait of Bagas Aditama" class="hero-image">
+                    <h1 class="hero-title">Bagas Aditama Suryo Nugroho</h1>
+                    <p class="hero-tagline">Informatics Student & Passionate Tutor</p>
+                    <a href="#contact" class="btn">Get in Touch</a>
+                    <div class="hero-socials">
+                        <!-- SVGs for icons will be added in the styling phase for better control -->
+                        <a href="https://www.linkedin.com/in/bagasaditama" target="_blank" aria-label="LinkedIn Profile">LI</a>
+                        <a href="https://www.instagram.com/bagasss_adisn" target="_blank" aria-label="Instagram Profile">IG</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!--                     ABOUT                    -->
+        <!-- ============================================ -->
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">About Me & My Philosophy</h2>
+                <div class="about-content">
+                    <p>
+                        Hello! I'm Bagas, an Informatics undergraduate with a deep fascination for technology's potential to shape our world. My academic journey is driven by a vision for a future where life is seamlessly integrated with technology, and I'm excited to be a part of building that future.
+                    </p>
+                    <p>
+                        My passion for tutoring comes from a simple belief: <strong>no student is left behind</strong>. I specialize in creating a minimal-pressure, encouraging, and fun environment where asking questions is celebrated. My goal is to help every student have that "Aha!" moment and find genuine joy in learning.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!--                   SERVICES                   -->
+        <!-- ============================================ -->
+        <section id="services">
+            <div class="container">
+                <h2 class="section-title">Tutoring Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3 class="service-title">Matematika</h3>
+                        <p class="service-description">SMP & SMA Level</p>
+                    </div>
+                    <div class="service-card">
+                        <h3 class="service-title">Fisika & Kimia (IPA)</h3>
+                        <p class="service-description">SMA Level (Dasar-dasar Biologi juga tersedia)</p>
+                    </div>
+                    <div class="service-card">
+                        <h3 class="service-title">English (Conversational)</h3>
+                        <p class="service-description">SMP & SMA Level</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!--               SKILLS & PROJECT               -->
+        <!-- ============================================ -->
+        <section id="skills">
+            <div class="container">
+                <h2 class="section-title">Skills & Expertise</h2>
+                <div class="skills-grid">
+                    <div class="skills-column">
+                        <h3 class="skills-subtitle">Technical Skills</h3>
+                        <ul class="skills-list">
+                            <li>Python</li>
+                            <li>Java</li>
+                            <li>C</li>
+                            <li>HTML & CSS</li>
+                            <li>JavaScript</li>
+                        </ul>
+                        <h3 class="skills-subtitle">Academic Strengths</h3>
+                        <ul class="skills-list">
+                            <li>Konsep Pemrograman</li>
+                            <li>Struktur Data & Algoritma</li>
+                            <li>Logical Thinking</li>
+                            <li>Problem Solving</li>
+                        </ul>
+                    </div>
+                    <div class="project-card">
+                        <h3 class="project-title">Personal Project: RPG Game</h3>
+                        <p class="project-description">
+                            Driven by my personal interest, I developed a text-based, turn-based RPG (Role-Playing Game) using Python. This project was a practical application of my skills in object-oriented programming (OOP), data structures, and fundamental game design logic.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!--                    CONTACT                   -->
+        <!-- ============================================ -->
+        <section id="contact">
+            <div class="container contact-container">
+                <h2 class="section-title">Let's Start Learning!</h2>
+                <p class="contact-text">Ready to build confidence and master new subjects? Reach out to schedule your first session or to ask any questions you might have.</p>
+                <form id="contact-form" class="contact-form" action="YOUR_FORMSPREE_URL" method="POST">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" required placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" required placeholder="Your Email">
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" required placeholder="Your Message"></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================================ -->
+    <!--                    FOOTER                    -->
+    <!-- ============================================ -->
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Bagas Aditama Suryo Nugroho. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Animation Library (GSAP) & Our Custom Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

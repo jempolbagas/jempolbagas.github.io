@@ -1,0 +1,44 @@
+/* ==========================================================================
+   Phase 0: Foundation & Design System
+   ========================================================================== */
+
+/* 1. CSS Variables (Our Design System)
+   ========================================================================== */
+:root {
+    /* Color Palette */
+    --color-background: #F8F7F4; /* Soft off-white */
+    --color-text-primary: #2c2c2c;   /* Dark charcoal for readability */
+    --color-text-secondary: #5a5a5a; /* Lighter gray for subtitles */
+    --color-accent: #0057FF;         /* Vibrant blue for interaction */
+    --color-glass-border: rgba(255, 255, 255, 0.2);
+
+    /* Typography */
+    --font-primary: 'Playfair Display', serif;
+    --font-secondary: 'Inter', sans-serif;
+
+    /* Spacing & Layout */
+    --spacing-unit: 1rem;
+    --container-width: 1100px;
+    --border-radius: 12px;
+}
+
+/* 2. Basic CSS Reset & Global Styles
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-secondary);
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevents horizontal scroll issues */
+}
