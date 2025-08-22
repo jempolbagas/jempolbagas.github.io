@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Bagas Aditama, an Informatics student and passionate tutor specializing in Math, Science, and English.">
     <title>Bagas Aditama - Informatics & Tutoring Portfolio</title>
 
     <!-- Google Fonts: Playfair Display (for elegant headings) & Inter (for clean body text) -->
@@ -14,7 +15,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- SVG Filter for the "Gooey" Effect -->
+    <!-- SVG Filter for the "Gooey" Effect
     <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg">
         <defs>
             <filter id="gooey">
@@ -23,7 +24,7 @@
                 <feBlend in="SourceGraphic" in2="goo" />
             </filter>
         </defs>
-    </svg>
+    </svg> -->
 
     <!-- Add this div for our custom cursor -->
     <div id="custom-cursor"></div>
@@ -84,10 +85,10 @@
                 <h2 class="section-title">About Me & My Philosophy</h2>
                 <div class="about-content">
                     <p>
-                        Hello! I'm Bagas, an Informatics undergraduate with a deep fascination for technology's potential to shape our world. My academic journey is driven by a vision for a future where life is seamlessly integrated with technology, and I'm excited to be a part of building that future.
+                        Hello! I'm <strong>Bagas</strong>, an Informatics undergraduate with a deep fascination for technology's potential to shape our world. My academic journey is driven by a vision for a future where life is seamlessly integrated with technology, and I'm excited to be a part of building that future.
                     </p>
                     <p>
-                        My passion for tutoring comes from a simple belief: <strong>no student is left behind</strong>. I specialize in creating a minimal-pressure, encouraging, and fun environment where asking questions is celebrated. My goal is to help every student have that "Aha!" moment and find genuine joy in learning.
+                        My passion for tutoring comes from a simple belief: <strong>no student is left behind</strong>. I specialize in creating a minimal-pressure, encouraging, and fun environment where asking questions is celebrated. My goal is to help every student have that "Aha!" moment and <strong>genuine joy in learning.</strong> 
                     </p>
                 </div>
             </div>
@@ -108,7 +109,7 @@
                             <!-- Icon: Calculator for Math -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="8" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="16" y2="21"></line><line x1="3" y1="8" x2="21" y2="8"></line><line x1="3" y1="16" x2="21" y2="16"></line></svg>
                         </div>
-                        <h3 class="service-title">Matematika</h3>
+                        <h3 class="service-title">Mathematics</h3>
                         <p class="service-description">SMP & SMA Level</p>
                     </div>
                     <!-- Card 2 -->
@@ -117,8 +118,8 @@
                             <!-- Icon: Atom for Science -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12s4.48 10 10 10s10-4.48 10-10z"></path><path d="M12 2v20"></path><path d="M21.17 8.83l-3.54 3.54"></path><path d="M6.37 15.63l-3.54 3.54"></path><path d="M21.17 15.17l-3.54-3.54"></path><path d="M6.37 8.37l-3.54-3.54"></path></svg>
                         </div>
-                        <h3 class="service-title">Fisika & Kimia (IPA)</h3>
-                        <p class="service-description">SMA Level (Dasar-dasar Biologi juga tersedia)</p>
+                        <h3 class="service-title">Science</h3>
+                        <p class="service-description">SMP-SMA Level (Fisika, Kimia, Biologi)</p>
                     </div>
                     <!-- Card 3 -->
                     <div class="service-card glass-card">
@@ -176,12 +177,15 @@
                 <p class="contact-text">Ready to build confidence and master new subjects? Reach out to schedule your first session or to ask any questions you might have.</p>
                 <form id="contact-form" class="contact-form" action="https://formspree.io/f/myzpqqdg" method="POST">
                     <div class="form-group">
+                        <label for="name" class="visually-hidden">Your Name</label>
                         <input type="text" id="name" name="name" required placeholder="Your Name">
                     </div>
                     <div class="form-group">
+                        <label for="email" class="visually-hidden">Your Email</label>
                         <input type="email" id="email" name="email" required placeholder="Your Email">
                     </div>
                     <div class="form-group">
+                        <label for="message" class="visually-hidden">Your Message</label>
                         <textarea id="message" name="message" required placeholder="Your Message"></textarea>
                     </div>
                     <button type="submit" class="btn">
@@ -209,7 +213,7 @@
 
     <!-- WebGL Library for Ripple Effect -->
     <!-- Load this first as it's a core graphical tool -->
-    <script src="https://cdn.jsdelivr.net/npm/curtainsjs@7.2.0/dist/curtains.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/curtainsjs@7.2.0/dist/curtains.min.js"></script> -->
 
     <!-- Animation Library (GSAP) -->
     <!-- Load the main GSAP library first -->
