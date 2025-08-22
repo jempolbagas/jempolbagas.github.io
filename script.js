@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // We can add hover effects back here if desired
         const interactiveElements = document.querySelectorAll('a, .btn');
         interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => cursorDot.style.transform = 'translate(-50%, -50%) scale(2)');
+            el.addEventListener('mouseenter', () => cursorDot.style.transform = 'translate(-50%, -50%) scale(1)');
             el.addEventListener('mouseleave', () => cursorDot.style.transform = 'translate(-50%, -50%) scale(1)');
         });
     }
