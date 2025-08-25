@@ -46,6 +46,24 @@ body::before {
     100% { transform: translate(20%, 20%) scale(1.5); }
 }
 
+@keyframes pulse-glow {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 30px 8px var(--color-accent-start);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow: 0 0 45px 12px var(--color-accent-start);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 30px 8px var(--color-accent-start);
+        opacity: 0.8;
+    }
+}
+
 /* ==========================================================================
    Global Styles & Utility Classes
    ========================================================================== */
@@ -135,6 +153,17 @@ section { padding: calc(var(--spacing-unit) * 4) 0; }
 /*  ==========================================================================
     Preloader Styles
     ========================================================================== */
+
+#constellation-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Sit behind everything else in the preloader */
+}
+
+
 #preloader {
     position: fixed;
     top: 0;
@@ -150,10 +179,39 @@ section { padding: calc(var(--spacing-unit) * 4) 0; }
     color: var(--color-text-primary);
 }
 
+.bloom-particle {
+    /* Sizing and Shape */
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+
+    /* Positioning */
+    position: absolute; /* Position relative to the #preloader */
+    top: 50%;
+    left: 50%;
+    /* We will set transform in the animation, but this is the initial offset */
+    transform: translate(-50%, -50%);
+
+    /* The Glow Effect */
+    background-color: var(--color-accent-end);
+    box-shadow: 0 0 30px 8px var(--color-accent-start);
+
+    /* Prepare for animation */
+    opacity: 0; /* Start it as invisible */
+}
+
+.preloader-content {
+    position: relative; /* Add this */
+    z-index: 1; /* Add this */
+    opacity: 0;
+    transform: translateY(10px);
+}
+
 .preloader-content h2 {
     font-family: var(--font-primary);
     font-size: 3rem;
     margin-bottom: 1rem;
+    text-shadow: 0 0 15px rgba(0, 255, 180, 0.3); /* Add this line */
 }
 
 .preloader-content p {
@@ -163,23 +221,25 @@ section { padding: calc(var(--spacing-unit) * 4) 0; }
 }
 
 .language-buttons .lang-btn {
-    background-image: linear-gradient(90deg, var(--color-accent-start), var(--color-accent-end));
-    color: #000;
+    background: var(--color-glass-bg);
+    color: var(--color-accent-start);
     padding: 0.8rem 2rem;
-    border: none;
+    border: 1px solid var(--color-glass-border);
     border-radius: 8px;
     font-family: var(--font-secondary);
     font-weight: 700;
     font-size: 1rem;
     text-decoration: none;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease; /* Use 'all' for smoother transitions */
     margin: 0 0.5rem;
 }
 
 .language-buttons .lang-btn:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 10px 20px rgba(0, 255, 180, 0.2);
+    border-color: rgba(0, 255, 180, 0.5);
+    box-shadow: 0 0 20px rgba(0, 255, 180, 0.2);
+    background: rgba(0, 255, 180, 0.1);
 }
 
 /* Header & Nav */
