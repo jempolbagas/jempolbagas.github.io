@@ -15,16 +15,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- SVG Filter for the "Gooey" Effect
-    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-            <filter id="gooey">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="goo" />
-                <feBlend in="SourceGraphic" in2="goo" />
-            </filter>
-        </defs>
-    </svg> -->
+
+    <!-- START OF PRELOADER -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <h2>Welcome</h2>
+            <p>Please select your language:</p>
+            <div class="language-buttons">
+                <a href="#">
+                    <button class="lang-btn" data-lang="en">English</button>
+                    <button class="lang-btn" data-lang="id">Bahasa Indonesia</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- END OF PRELOADER -->
 
     <!-- Add this div for our custom cursor -->
     <div id="custom-cursor"></div>
@@ -38,10 +43,10 @@
                 <a href="#" class="nav-logo">Bagas A.</a>
                 <div class="nav-menu">
                     <ul class="nav-links">
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#skills">Skills</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#about" data-lang-en="About" data-lang-id="Tentang Saya"></a></li>
+                        <li><a href="#services" data-lang-en="Services" data-lang-id="Layanan"></a></li>
+                        <li><a href="#skills" data-lang-en="Skills" data-lang-id="Kemampuan"></a></li>
+                        <li><a href="#contact" data-lang-en="Contact" data-lang-id="Kontak"></a></li>
                     </ul>
                 </div>
                 <button class="hamburger" id="hamburger-menu" aria-label="Toggle Menu">
@@ -63,7 +68,7 @@
                     <img src="assets/Bagas_Picture.webp" alt="A professional portrait of Bagas Aditama" class="hero-image">
                     <h1 class="hero-title">Bagas Aditama Suryo Nugroho</h1>
                     <p class="hero-tagline">Informatics Student & Passionate Tutor</p>
-                    <a href="#contact" class="btn">Get in Touch</a>
+                    <a href="#contact" class="btn" data-lang-en="Get in Touch" data-lang-id="Hubungi Saya"></a>
                     <!-- REPLACE the old .hero-socials div with this one -->
                     <div class="hero-socials">
                         <a href="https://www.linkedin.com/in/bagasaditama" target="_blank" aria-label="LinkedIn Profile" class="social-icon">
@@ -82,13 +87,15 @@
         <!-- ============================================ -->
         <section id="about">
             <div class="container">
-                <h2 class="section-title">About Me & My Philosophy</h2>
+                <h2 class="section-title" data-lang-en="About Me & My Philosophy" data-lang-id="Tentang Saya & Filosofi Saya"></h2>
                 <div class="about-content">
-                    <p>
-                        Hello! I'm <strong>Bagas</strong>, an Informatics undergraduate with a deep fascination for technology's potential to shape our world. My academic journey is driven by a vision for a future where life is seamlessly integrated with technology, and I'm excited to be a part of building that future.
+                    <p 
+                        data-lang-en="Hello! I'm <strong>Bagas</strong>, an Informatics undergraduate with a deep fascination for technology's potential to shape our world. My academic journey is driven by a vision for a future where life is seamlessly integrated with technology, and I'm excited to be a part of building that future." 
+                        data-lang-id="Halo! Kenalkan, saya <strong>Bagas</strong>, mahasiswa Informatika yang terpesona dengan bagaimana teknologi bisa mengubah dunia. Saya punya visi tentang masa depan di mana hidup kita menyatu dengan teknologi, dan saya ingin ikut andil mewujudkannya.">
                     </p>
-                    <p>
-                        My passion for tutoring comes from a simple belief: <strong>no student is left behind</strong>. I specialize in creating a minimal-pressure, encouraging, and fun environment where asking questions is celebrated. My goal is to help every student have that "Aha!" moment and <strong>genuine joy in learning.</strong> 
+                    <p 
+                        data-lang-en="My passion for tutoring comes from a simple belief: <strong>no student is left behind</strong>. I specialize in creating a minimal-pressure, encouraging, and fun environment where asking questions is celebrated. My goal is to help every student have that &quot;Aha!&quot; moment and <strong>genuine joy in learning.</strong>" 
+                        data-lang-id="Passion saya dalam mengajar datang dari keyakinan kalau pada dasarnya <strong>tidak ada anak yang tertinggal</strong>. Makanya, saya terbiasa membuat suasana belajar yang santai, saling mendukung, dan asyik, di mana semua pertanyaan sangat diterima. Tujuan saya adalah agar setiap siswa bisa mengalami momen &quot;Aha!&quot; dan benar-benar <strong> proses belajar.</strong>">
                     </p>
                 </div>
             </div>
@@ -109,8 +116,8 @@
                             <!-- Icon: Calculator for Math -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="8" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="16" y2="21"></line><line x1="3" y1="8" x2="21" y2="8"></line><line x1="3" y1="16" x2="21" y2="16"></line></svg>
                         </div>
-                        <h3 class="service-title">Mathematics</h3>
-                        <p class="service-description">SMP & SMA Level</p>
+                        <h3 class="service-title" data-lang-en="Mathematics" data-lang-id="Matematika"></h3>
+                        <p class="service-description" data-lang-en="SMP & SMA Level" data-lang-id="Tingkat SMP & SMA"></p>
                     </div>
                     <!-- Card 2 -->
                     <div class="service-card glass-card">
@@ -118,8 +125,8 @@
                             <!-- Icon: Atom for Science -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12s4.48 10 10 10s10-4.48 10-10z"></path><path d="M12 2v20"></path><path d="M21.17 8.83l-3.54 3.54"></path><path d="M6.37 15.63l-3.54 3.54"></path><path d="M21.17 15.17l-3.54-3.54"></path><path d="M6.37 8.37l-3.54-3.54"></path></svg>
                         </div>
-                        <h3 class="service-title">Science</h3>
-                        <p class="service-description">SMP-SMA Level (Physics, Chemistry, and Biology)</p>
+                        <h3 class="service-title" data-lang-en="Science" data-lang-id="IPA"></h3>
+                        <p class="service-description" data-lang-en="SMP & SMA Level (Physics, Chemistry, & Biology)" data-lang-id="Tingkat SMP & SMA (Fisika, Kimia, & Biologi)"></p>
                     </div>
                     <!-- Card 3 -->
                     <div class="service-card glass-card">
@@ -128,7 +135,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                         </div>
                         <h3 class="service-title">English (Conversational)</h3>
-                        <p class="service-description">SMP & SMA Level</p>
+                        <p class="service-description" data-lang-en="SMP & SMA Level" data-lang-id="Tingkat SMP & SMA"></p>
                     </div>
                 </div>
             </div>
@@ -139,29 +146,31 @@
         <!-- ============================================ -->
         <section id="skills">
             <div class="container">
-                <h2 class="section-title">Skills & Expertise</h2>
+                <h2 class="section-title" data-lang-en="Skills & Expertise" data-lang-id="Kemampuan & Keahlian"></h2>
                 <div class="skills-grid">
                     <div class="skills-column">
-                        <h3 class="skills-subtitle">Technical Skills</h3>
+                        <h3 class="skills-subtitle" data-lang-en="Technical Skills" data-lang-id="Kemampuan Teknis"></h3>
                         <ul class="skills-list">
                             <li>Python</li>
                             <li>Java</li>
                             <li>C</li>
+                            <li>C++</li>
                             <li>HTML & CSS</li>
-                            <li>JavaScript</li>
                         </ul>
-                        <h3 class="skills-subtitle">Academic Strengths</h3>
+                        <h3 class="skills-subtitle" data-lang-en="Academic Strengths" data-lang-id="Kemampuan Akademik">Academic Strengths</h3>
                         <ul class="skills-list">
-                            <li>Konsep Pemrograman</li>
-                            <li>Struktur Data & Algoritma</li>
-                            <li>Logical Thinking</li>
-                            <li>Problem Solving</li>
+                            <li data-lang-en="Programming Concepts" data-lang-id="Konsep Pemrograman"></li>
+                            <li data-lang-en="Algorithm & Data Structure" data-lang-id="Struktur Data & Algoritma"></li>
+                            <li data-lang-en="Quantitative Skills" data-lang-id="Keterampilan Kuantitatif"></li>
+                            <li data-lang-en="Logical Thinking" data-lang-id="Penalaran Logis"></li>
+                            <li data-lang-en="Problem Solving" data-lang-id="Pemecahan Masalah"></li>
                         </ul>
                     </div>
                     <div class="project-card">
                         <h3 class="project-title">Personal Project: RPG Game</h3>
-                        <p class="project-description">
-                            Driven by my personal interest, I developed a text-based, turn-based RPG (Role-Playing Game) using Python. This project was a practical application of my skills in object-oriented programming (OOP), data structures, and fundamental game design logic.
+                        <p class="project-description" 
+                            data-lang-id="Didasari oleh minat pribadi, saya mengembangkan sebuah game RPG (<em>Role-Playing Game</em>) berbasis teks dengan sistem <em>turn-based</em> menggunakan Python. Proyek ini menjadi penerapan praktis dari keahlian saya dalam bidang <em>object-oriented programming</em> (OOP), struktur data, dan logika dasar desain game."
+                            data-lang-en=" Driven by my personal interest, I developed a text-based, turn-based RPG (Role-Playing Game) using Python. This project was a practical application of my skills in object-oriented programming (OOP), data structures, and fundamental game design logic.">
                         </p>
                     </div>
                 </div>
@@ -174,7 +183,10 @@
         <section id="contact">
             <div class="container contact-container">
                 <h2 class="section-title">Let's Start Learning!</h2>
-                <p class="contact-text">Ready to build confidence and master new subjects? Reach out to schedule your first session or to ask any questions you might have.</p>
+                <p class="contact-text" 
+                    data-lang-id="Sudah siap jadi lebih percaya diri dan jago di pelajaran baru? Yuk, hubungi saya untuk mengatur jadwal sesi pertama kita, atau kalau mau tanya-tanya dulu juga bisa!"
+                    data-lang-en="Ready to build confidence and master new subjects? Reach out to schedule your first session or to ask any questions you might have.">
+                </p>
                 <form id="contact-form" class="contact-form" action="https://formspree.io/f/myzpqqdg" method="POST">
                     <div class="form-group">
                         <label for="name" class="visually-hidden">Your Name</label>

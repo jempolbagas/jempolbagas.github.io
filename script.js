@@ -2,6 +2,98 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
+    const preloader = document.getElementById('preloader');
+    const langButtons = document.querySelectorAll('.lang-btn');
+
+    /**
+     *  All GSAP animations are now inside this function.
+     *  It will only be called after the language is selected.
+     */
+    function startAnimations() {
+        // Refreshes ScrollTrigger to ensure positions are calculated correctly after the preloader is gone.
+        ScrollTrigger.refresh();
+
+        const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 0.8 } });
+        tl.from('.hero-content', { opacity: 0, scale: 0.95, duration: 0.5 })
+          .from('.hero-image', { opacity: 0, scale: 0.9, y: -30 }, "-=0.3")
+          .from('.hero-title', { opacity: 0, y: 20 }, "-=0.3")
+          .from('.hero-tagline', { opacity: 0, y: 20 }, "-=0.5")
+          .from('.btn', { opacity: 0, y: 20 }, "-=0.6")
+          .from('.hero-socials', { opacity: 0, y: 20 }, "-=0.7");
+
+        gsap.utils.toArray('.section-title').forEach(title => {
+            gsap.from(title, {
+                opacity: 0, y: 30, duration: 0.6,
+                scrollTrigger: { trigger: title, start: 'top 85%', toggleActions: 'play none none none' }
+            });
+        });
+
+        gsap.from('.service-card', {
+            opacity: 0, y: 40, duration: 0.5, stagger: 0.2,
+            scrollTrigger: { trigger: '.services-grid', start: 'top 80%', toggleActions: 'play none none none' }
+        });
+
+        gsap.from('.skills-column', {
+            opacity: 0, x: -50, duration: 0.8,
+            scrollTrigger: { trigger: '.skills-grid', start: 'top 80%', toggleActions: 'play none none none' }
+        });
+
+        gsap.from('.project-card', {
+            opacity: 0, x: 50, duration: 0.8,
+            scrollTrigger: { trigger: '.skills-grid', start: 'top 80%', toggleActions: 'play none none none' }
+        });
+        
+        gsap.from('.contact-container', {
+            opacity: 0, scale: 0.9, duration: 0.8,
+            scrollTrigger: { trigger: '#contact', start: 'top 80%', toggleActions: 'play none none none' }
+        });
+
+        gsap.to('body', {
+            backgroundPosition: '50% 100%', ease: 'none',
+            scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom bottom', scrub: true }
+        });
+    }
+
+    /**
+     * Sets the text content based on the selected language.
+     * @param {string} lang - The selected language ('en' or 'id').
+     */
+    function setLanguage(lang) {
+        const elements = document.querySelectorAll('[data-lang-en]');
+        elements.forEach(element => {
+            const translation = element.getAttribute(`data-lang-${lang}`);
+            if (translation) {
+                element.innerHTML = translation;
+            }
+        });
+    }
+
+    // Logic for handling language selection and starting the app
+    function proceedToSite(lang) {
+        setLanguage(lang);
+        // Fade out the preloader
+        gsap.to(preloader, {
+            opacity: 0,
+            duration: 0.5,
+            onComplete: () => {
+                preloader.style.display = 'none';
+                startAnimations();
+            }
+        });
+    }
+
+    // The 'if' block that checked localStorage has been removed.
+    // The preloader will now always show on page load.
+
+    // Add click listeners to the language buttons
+    langButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const selectedLang = button.getAttribute('data-lang');
+            // The line that saved the language to localStorage has been removed.
+            proceedToSite(selectedLang);
+        });
+    });
+
     /* ==========================================================================
        Part 3.1: Essential Functionality
        ========================================================================== */
@@ -28,6 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
 
     /* ==========================================================================
     Phase B (Revised): The Comet Cursor
@@ -100,47 +193,4 @@ document.addEventListener('DOMContentLoaded', function() {
             el.addEventListener('mouseleave', () => cursorDot.style.transform = 'translate(-50%, -50%) scale(1)');
         });
     }
-
-    /* ==========================================================================
-       GSAP Animations
-       ========================================================================== */
-    const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 0.8 } });
-    tl.from('.hero-content', { opacity: 0, scale: 0.95, duration: 0.5 })
-      .from('.hero-image', { opacity: 0, scale: 0.9, y: -30 }, "-=0.3")
-      .from('.hero-title', { opacity: 0, y: 20 }, "-=0.3")
-      .from('.hero-tagline', { opacity: 0, y: 20 }, "-=0.5")
-      .from('.btn', { opacity: 0, y: 20 }, "-=0.6")
-      .from('.hero-socials', { opacity: 0, y: 20 }, "-=0.7");
-
-    gsap.utils.toArray('.section-title').forEach(title => {
-        gsap.from(title, {
-            opacity: 0, y: 30, duration: 0.6,
-            scrollTrigger: { trigger: title, start: 'top 85%', toggleActions: 'play none none none' }
-        });
-    });
-
-    gsap.from('.service-card', {
-        opacity: 0, y: 40, duration: 0.5, stagger: 0.2,
-        scrollTrigger: { trigger: '.services-grid', start: 'top 80%', toggleActions: 'play none none none' }
-    });
-
-    gsap.from('.skills-column', {
-        opacity: 0, x: -50, duration: 0.8,
-        scrollTrigger: { trigger: '.skills-grid', start: 'top 80%', toggleActions: 'play none none none' }
-    });
-
-    gsap.from('.project-card', {
-        opacity: 0, x: 50, duration: 0.8,
-        scrollTrigger: { trigger: '.skills-grid', start: 'top 80%', toggleActions: 'play none none none' }
-    });
-    
-    gsap.from('.contact-container', {
-        opacity: 0, scale: 0.9, duration: 0.8,
-        scrollTrigger: { trigger: '#contact', start: 'top 80%', toggleActions: 'play none none none' }
-    });
-
-    gsap.to('body', {
-        backgroundPosition: '50% 100%', ease: 'none',
-        scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom bottom', scrub: true }
-    });
 });
