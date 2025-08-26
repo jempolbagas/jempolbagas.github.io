@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 1.5 + 0.5; // Size between 0.5px and 2px
-                this.baseOpacity = Math.random() * 0.3 + 0.1; // Base opacity between 0.1 and 0.4
+                this.size = Math.random() * 1.5 + 0.5; 
+                this.baseOpacity = Math.random() * 0.3 + 0.1; 
                 this.opacity = this.baseOpacity;
                 this.color = `rgba(0, 255, 180, ${this.opacity})`;
             }
@@ -63,19 +63,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        function animate() {
+        function updateCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (const particle of particles) {
                 particle.update();
             }
 
             // ==========================================================
-            // NEW PLEXUS EFFECT LOGIC
+            // PLEXUS EFFECT
             // ==========================================================
             // This nested loop compares every particle with every other particle
+
             for (let i = 0; i < particles.length; i++) {
-                // The j = i optimization ensures we don't compare particles to themselves
-                // or draw the same line twice.
+                // ensures we don't compare particles to themselves or draw the same line twice.
                 for (let j = i; j < particles.length; j++) {
                     const p1 = particles[i];
                     const p2 = particles[j];
@@ -85,8 +85,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     // 1. Check if the particles are close enough
                     if (distance < lineMaxDistance) {
-                        // 2. Only draw a line if BOTH particles are currently glowing
-                        // from the cursor's proximity. This is our interactivity check.
+                        // 2. Only draw a line if both particles are currently glowing
+                        // from the cursor's proximity. 
                         const isP1Active = p1.opacity > p1.baseOpacity;
                         const isP2Active = p2.opacity > p2.baseOpacity;
 
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             ctx.beginPath();
                             ctx.moveTo(p1.x, p1.y);
                             ctx.lineTo(p2.x, p2.y);
-                            ctx.strokeStyle = `rgba(0, 255, 180, ${lineOpacity * 0.5})`; // Multiplied by 0.5 to keep it subtle
+                            ctx.strokeStyle = `rgba(0, 255, 180, ${lineOpacity * 0.5})`; 
                             ctx.lineWidth = 0.5;
                             ctx.stroke();
                         }
@@ -107,10 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
             // ==========================================================
-            // END OF NEW PLEXUS EFFECT LOGIC
+            // END OF PLEXUS EFFECT LOGIC
             // ==========================================================
-
-            requestAnimationFrame(animate);
         }
 
         window.addEventListener('resize', () => {
@@ -130,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         init();
-        animate();
+        updateCanvas();
     }
 
     const preloader = document.getElementById('preloader');
@@ -139,13 +137,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const preloaderContent = document.querySelector('.preloader-content');
 
     // ==========================================================
-    // NEW PRELOADER ANIMATION TIMELINE
+    // PRELOADER ANIMATION TIMELINE
     // ==========================================================
     function runPreloaderAnimation() {
-        // 1. Initially, apply the CSS pulse animation to the particle
         bloomParticle.style.animation = 'pulse-glow 2s infinite ease-in-out';
         
-        // 2. Create the main GSAP timeline
+        // Create the main GSAP timeline
         const tl = gsap.timeline();
 
         tl
@@ -157,7 +154,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add a 1.5-second pause to let the pulse animation be seen
             .to({}, { duration: 1.5 }) 
             
-            // The BLOOM effect starts here
             .to(bloomParticle, {
                 // Stop the CSS animation before GSAP takes full control
                 onStart: () => bloomParticle.style.animation = 'none',
@@ -184,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
     /**
-     *  All GSAP animations are now inside this function.
+     *  All GSAP animations
      *  It will only be called after the language is selected.
      */
     function startAnimations() {
@@ -260,14 +256,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // The 'if' block that checked localStorage has been removed.
-    // The preloader will now always show on page load.
-
     // Add click listeners to the language buttons
     langButtons.forEach(button => {
         button.addEventListener('click', () => {
             const selectedLang = button.getAttribute('data-lang');
-            // The line that saved the language to localStorage has been removed.
             proceedToSite(selectedLang);
         });
     });
@@ -313,9 +305,9 @@ document.addEventListener('DOMContentLoaded', function() {
             element: null,
             path: null,
             points: [],
-            mouse: { x: -100, y: -100 }, // Real mouse position
+            mouse: { x: -100, y: -100 }, 
             lastMouse: { x: -100, y: -100 },
-            position: { x: -100, y: -100 }, // Smoothed cursor position
+            position: { x: -100, y: -100 }, 
             velocity: { x: 0, y: 0 },
             size: 24, // The base diameter of the cursor
             stiffness: 0.77, // Spring stiffness
@@ -340,11 +332,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Start the animation loop
-            animateCursor();
+            updateCursor();
         }
 
         // 2. THE PHYSICS & ANIMATION LOOP
-        function animateCursor() {
+        function updateCursor() {
             // Calculate spring forces
             const dx = cursor.mouse.x - cursor.position.x;
             const dy = cursor.mouse.y - cursor.position.y;
@@ -391,7 +383,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // 3. GENERATE THE SVG PATH DATA
-            // This function turns the 8 points into a smooth, curved path
+            // turn the 8 points into a smooth, curved path
             let pathData = `M ${cursor.points[0].x} ${cursor.points[0].y}`;
             for (let i = 1; i < 8; i++) {
                 const midX = (cursor.points[i].x + cursor.points[(i + 1) % 8].x) / 2;
@@ -403,8 +395,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Position the SVG container
             cursor.element.style.transform = `translate(${cursor.position.x - 50}px, ${cursor.position.y - 50}px)`;
-
-            requestAnimationFrame(animateCursor);
         }
 
         // 4. EVENT LISTENERS
@@ -413,7 +403,6 @@ document.addEventListener('DOMContentLoaded', function() {
             cursor.mouse.y = e.clientY;
         });
 
-        // We can add hover effects back here if desired
         const interactiveElements = document.querySelectorAll('a, .btn, .lang-btn');
         interactiveElements.forEach(el => {
             el.addEventListener('mouseenter', () => { /* Future hover effect logic here */ });
@@ -422,6 +411,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
         setupCursor();
     }
+
+    // ==========================================================
+    // Master Animation Loop
+    // ==========================================================
+    function mainLoop() {
+        if (canvas) {
+            updateCanvas();
+        }
+        if (!isTouchDevice) {
+            updateCursor();
+        }
+        requestAnimationFrame(mainLoop);
+    }
+    mainLoop();
 });
 
 feather.replace();

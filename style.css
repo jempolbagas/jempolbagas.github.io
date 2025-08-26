@@ -49,18 +49,12 @@ body::before {
 @keyframes pulse-glow {
     0% {
         transform: translate(-50%, -50%) scale(1);
-        box-shadow: 0 0 30px 8px var(--color-accent-start);
-        opacity: 0.8;
     }
     50% {
         transform: translate(-50%, -50%) scale(1.1);
-        box-shadow: 0 0 45px 12px var(--color-accent-start);
-        opacity: 1;
     }
     100% {
         transform: translate(-50%, -50%) scale(1);
-        box-shadow: 0 0 30px 8px var(--color-accent-start);
-        opacity: 0.8;
     }
 }
 
@@ -160,7 +154,7 @@ section { padding: calc(var(--spacing-unit) * 4) 0; }
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; /* Sit behind everything else in the preloader */
+    z-index: 0; 
 }
 
 
@@ -180,29 +174,41 @@ section { padding: calc(var(--spacing-unit) * 4) 0; }
 }
 
 .bloom-particle {
-    /* Sizing and Shape */
+    /* Sizing and Shape (The core dot) */
     width: 15px;
     height: 15px;
     border-radius: 50%;
-
+    
     /* Positioning */
-    position: absolute; /* Position relative to the #preloader */
+    position: absolute;
     top: 50%;
     left: 50%;
-    /* We will set transform in the animation, but this is the initial offset */
     transform: translate(-50%, -50%);
-
-    /* The Glow Effect */
+    
+    /* The solid center color */
     background-color: var(--color-accent-end);
-    box-shadow: 0 0 30px 8px var(--color-accent-start);
-
+    
     /* Prepare for animation */
-    opacity: 0; /* Start it as invisible */
+    opacity: 0;
+}
+
+.bloom-particle::after {
+    content: '';
+    position: absolute;
+    top: -100%; 
+    left: -100%;
+    width: 300%; 
+    height: 300%;
+    border-radius: 50%;
+    
+    background: radial-gradient(circle, var(--color-accent-start) 20%, transparent 70%);
+    
+    opacity: 0.8;
 }
 
 .preloader-content {
-    position: relative; /* Add this */
-    z-index: 1; /* Add this */
+    position: relative; 
+    z-index: 1; 
     opacity: 0;
     transform: translateY(10px);
 }
@@ -211,7 +217,7 @@ section { padding: calc(var(--spacing-unit) * 4) 0; }
     font-family: var(--font-primary);
     font-size: 3rem;
     margin-bottom: 1rem;
-    text-shadow: 0 0 15px rgba(0, 255, 180, 0.3); /* Add this line */
+    text-shadow: 0 0 15px rgba(0, 255, 180, 0.3);
 }
 
 .preloader-content p {
@@ -231,7 +237,7 @@ section { padding: calc(var(--spacing-unit) * 4) 0; }
     font-size: 1rem;
     text-decoration: none;
     cursor: none;
-    transition: all 0.3s ease; /* Use 'all' for smoother transitions */
+    transition: all 0.3s ease;
     margin: 0 0.5rem;
 }
 
@@ -269,7 +275,7 @@ section { padding: calc(var(--spacing-unit) * 4) 0; }
 .hero-title { font-family: var(--font-primary); font-size: 4rem; line-height: 1.1; margin-bottom: 0.5rem; }
 .hero-tagline { font-size: 1.25rem; color: var(--color-text-secondary); margin-top: var(--spacing-unit); }
 .hero-socials { display: flex; gap: calc(var(--spacing-unit) * 1.5); margin-top: var(--spacing-unit); }
-.hero-socials .social-icon svg { width: 35px; height: 35px; }
+.hero-socials .social-icon svg { width: 35px; height: 35px;}
 
 /* About Section */
 #about { background-color: rgba(0, 0, 0, 0.1); }
@@ -281,7 +287,7 @@ section { padding: calc(var(--spacing-unit) * 4) 0; }
 .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--spacing-unit); }
 .service-card { text-align: center; }
 .service-icon { width: 60px; height: 60px; margin: 0 auto 1rem; background-color: rgba(0, 255, 180, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-.service-icon svg { width: 28px; height: 28px; color: var(--color-accent-start); stroke: var(--color-accent-start); stroke-width: "5"; stroke-linecap:"round"; stroke-linejoin:"round"}
+.service-icon svg { width: 28px; height: 28px; color: var(--color-accent-start); stroke: var(--color-accent-start);}
 .service-title { font-family: var(--font-primary); font-size: 1.5rem; margin-bottom: 0.5rem; }
 .service-description { color: var(--color-text-secondary); font-size: 1rem; opacity: 0.9; }
 
@@ -348,25 +354,22 @@ section { padding: calc(var(--spacing-unit) * 4) 0; }
    Phase C: The Elastic String Cursor
    ========================================================================== */
 
-/* 1. Hide the native cursor */
 body, a, .btn {
     cursor: none;
 }
 
-/* 2. Style the SVG cursor element */
 .elastic-cursor {
     position: fixed;
     top: 0;
     left: 0;
-    pointer-events: none; /* The cursor should not block clicks */
+    pointer-events: none; 
     z-index: 9999;
+    will-change: transform; 
 }
 
-/* 3. Style the path inside the SVG */
 .elastic-cursor path {
     fill: var(--color-accent-start);
-    /* stroke: var(--color-background); A stroke helps define the shape */
-    /* stroke-width: 2px; */
-    transition: fill 0.2s ease; /* Smooth transition for hover effects */
+    transition: fill 0.2s ease; 
     filter: drop-shadow(0 0 8px rgba(0, 255, 179, 0.74));
+    will-change: filter;
 }
