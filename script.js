@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Animate the particle into view and let it pulse for a bit
             .to(bloomParticle, { 
                 opacity: 1, 
-                duration: 0.5 
+                duration: 1 
             })
             // Add a 1.5-second pause to let the pulse animation be seen
             .to({}, { duration: 1.5 }) 
@@ -318,8 +318,8 @@ document.addEventListener('DOMContentLoaded', function() {
             position: { x: -100, y: -100 }, // Smoothed cursor position
             velocity: { x: 0, y: 0 },
             size: 24, // The base diameter of the cursor
-            stiffness: 0.15, // Spring stiffness
-            damping: 0.52, // Damping factor
+            stiffness: 0.77, // Spring stiffness
+            damping: 0.23, // Damping factor
         };
 
         function setupCursor() {
