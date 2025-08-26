@@ -2,6 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
+    document.documentElement.style.cursor = 'none';
     // ==========================================================
     // INTERACTIVE CONSTELLATION CANVAS
     // ==========================================================
@@ -11,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let particles = [];
         let mouse = { x: null, y: null };
         const glowRadius = 250; // The radius around the cursor where particles will glow
+        const lineMaxDistance = 120; // Max distance for lines to appear
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -66,6 +68,48 @@ document.addEventListener('DOMContentLoaded', function() {
             for (const particle of particles) {
                 particle.update();
             }
+
+            // ==========================================================
+            // NEW PLEXUS EFFECT LOGIC
+            // ==========================================================
+            // This nested loop compares every particle with every other particle
+            for (let i = 0; i < particles.length; i++) {
+                // The j = i optimization ensures we don't compare particles to themselves
+                // or draw the same line twice.
+                for (let j = i; j < particles.length; j++) {
+                    const p1 = particles[i];
+                    const p2 = particles[j];
+                    const dx = p1.x - p2.x;
+                    const dy = p1.y - p2.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    // 1. Check if the particles are close enough
+                    if (distance < lineMaxDistance) {
+                        // 2. Only draw a line if BOTH particles are currently glowing
+                        // from the cursor's proximity. This is our interactivity check.
+                        const isP1Active = p1.opacity > p1.baseOpacity;
+                        const isP2Active = p2.opacity > p2.baseOpacity;
+
+                        if (isP1Active && isP2Active) {
+                            // 3. Calculate line opacity based on distance.
+                            // The closer the particles, the brighter the line.
+                            const lineOpacity = 1 - (distance / lineMaxDistance);
+
+                            // 4. Draw the elegant, glowing line.
+                            ctx.beginPath();
+                            ctx.moveTo(p1.x, p1.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = `rgba(0, 255, 180, ${lineOpacity * 0.5})`; // Multiplied by 0.5 to keep it subtle
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+            // ==========================================================
+            // END OF NEW PLEXUS EFFECT LOGIC
+            // ==========================================================
+
             requestAnimationFrame(animate);
         }
 
@@ -257,74 +301,127 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     /* ==========================================================================
-    Phase B (Revised): The Comet Cursor
-    ========================================================================== */
+        Phase C: The Elastic String Cursor
+       ========================================================================== */
 
     // Check if the user is on a touch device
     const isTouchDevice = 'ontouchstart' in window;
 
     if (!isTouchDevice) {
-        const cursorDot = document.createElement('div');
-        cursorDot.className = 'cursor-dot';
-        document.body.appendChild(cursorDot);
+        // 1. SETUP
+        const cursor = {
+            element: null,
+            path: null,
+            points: [],
+            mouse: { x: -100, y: -100 }, // Real mouse position
+            lastMouse: { x: -100, y: -100 },
+            position: { x: -100, y: -100 }, // Smoothed cursor position
+            velocity: { x: 0, y: 0 },
+            size: 24, // The base diameter of the cursor
+            stiffness: 0.15, // Spring stiffness
+            damping: 0.52, // Damping factor
+        };
 
-        const trailElements = [];
-        const numTrailElements = 25; // The number of particles in our trail
-        const positions = []; // An array to store the history of cursor positions
+        function setupCursor() {
+            const svgNS = "http://www.w3.org/2000/svg";
+            cursor.element = document.createElementNS(svgNS, "svg");
+            cursor.element.setAttribute('class', 'elastic-cursor');
+            cursor.element.setAttribute('viewBox', '0 0 100 100');
+            cursor.element.setAttribute('width', '100');
+            cursor.element.setAttribute('height', '100');
 
-        // Create the trail elements and add them to the DOM
-        for (let i = 0; i < numTrailElements; i++) {
-            const el = document.createElement('div');
-            el.className = 'cursor-trail';
-            document.body.appendChild(el);
-            trailElements.push(el);
-            positions.push({ x: -100, y: -100 }); // Start them off-screen
+            cursor.path = document.createElementNS(svgNS, "path");
+            cursor.element.appendChild(cursor.path);
+            document.body.appendChild(cursor.element);
+
+            // Create 8 points for a circle
+            for (let i = 0; i < 8; i++) {
+                cursor.points.push({ x: 50, y: 50 });
+            }
+            
+            // Start the animation loop
+            animateCursor();
         }
 
-        let mouseX = -100, mouseY = -100;
-
-        window.addEventListener('mousemove', e => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
+        // 2. THE PHYSICS & ANIMATION LOOP
         function animateCursor() {
-            // Update the main dot's position instantly
-            cursorDot.style.left = `${mouseX}px`;
-            cursorDot.style.top = `${mouseY}px`;
+            // Calculate spring forces
+            const dx = cursor.mouse.x - cursor.position.x;
+            const dy = cursor.mouse.y - cursor.position.y;
+            const ax = dx * cursor.stiffness;
+            const ay = dy * cursor.stiffness;
 
-            // Add the current position to the history
-            positions.unshift({ x: mouseX, y: mouseY });
-            // Remove the oldest position if the array is too long
-            if (positions.length > numTrailElements) {
-                positions.pop();
+            // Apply acceleration to velocity, with damping
+            cursor.velocity.x += ax;
+            cursor.velocity.y += ay;
+            cursor.velocity.x *= cursor.damping;
+            cursor.velocity.y *= cursor.damping;
+
+            // Update smoothed position
+            cursor.position.x += cursor.velocity.x;
+            cursor.position.y += cursor.velocity.y;
+
+            // Shape Calculation 
+            // Calculate stretch and rotation based on velocity
+            const speed = Math.sqrt(cursor.velocity.x**2 + cursor.velocity.y**2);
+            const stretch = Math.min(speed / 25, 1); // Adjusted sensitivity
+            const angle = Math.atan2(cursor.velocity.y, cursor.velocity.x);
+            
+            const radius = cursor.size / 2;
+            const svgCenter = 50; // The center of our 100x100 viewBox
+
+            // Update the 8 points of our shape
+            for (let i = 0; i < 8; i++) {
+                const pointAngle = (i / 8) * 2 * Math.PI;
+                
+                // Add stretch effect to create an ellipse
+                let stretchedRadius = radius;
+                // Points on the axis of movement get stretched out
+                if (i === 0 || i === 4) stretchedRadius += radius * stretch; 
+                // Points perpendicular to movement get squashed
+                if (i === 2 || i === 6) stretchedRadius -= radius * stretch * 0.5;
+
+                // **THE FIX:** Calculate point positions relative to the SVG CENTER (50), not the absolute screen position.
+                const targetX = svgCenter + Math.cos(pointAngle + angle) * stretchedRadius;
+                const targetY = svgCenter + Math.sin(pointAngle + angle) * stretchedRadius;
+
+                // Smoothly move the points towards their new target shape
+                cursor.points[i].x += (targetX - cursor.points[i].x) * 0.5;
+                cursor.points[i].y += (targetY - cursor.points[i].y) * 0.5;
             }
 
-            // Animate the trail elements
-            trailElements.forEach((el, index) => {
-                const pos = positions[index];
-                if (pos) {
-                    el.style.left = `${pos.x}px`;
-                    el.style.top = `${pos.y}px`;
-
-                    // Calculate scale and opacity based on position in the trail
-                    const scale = (numTrailElements - index) / numTrailElements;
-                    el.style.transform = `translate(-50%, -50%) scale(${scale})`;
-                    el.style.opacity = scale * 0.7;
-                    el.style.width = `${scale * 15}px`;
-                    el.style.height = `${scale * 15}px`;
-                }
-            });
+            // 3. GENERATE THE SVG PATH DATA
+            // This function turns the 8 points into a smooth, curved path
+            let pathData = `M ${cursor.points[0].x} ${cursor.points[0].y}`;
+            for (let i = 1; i < 8; i++) {
+                const midX = (cursor.points[i].x + cursor.points[(i + 1) % 8].x) / 2;
+                const midY = (cursor.points[i].y + cursor.points[(i + 1) % 8].y) / 2;
+                pathData += ` Q ${cursor.points[i].x} ${cursor.points[i].y}, ${midX} ${midY}`;
+            }
+            pathData += " Z";
+            cursor.path.setAttribute("d", pathData);
+            
+            // Position the SVG container
+            cursor.element.style.transform = `translate(${cursor.position.x - 50}px, ${cursor.position.y - 50}px)`;
 
             requestAnimationFrame(animateCursor);
         }
-        animateCursor();
+
+        // 4. EVENT LISTENERS
+        window.addEventListener('mousemove', e => {
+            cursor.mouse.x = e.clientX;
+            cursor.mouse.y = e.clientY;
+        });
 
         // We can add hover effects back here if desired
-        const interactiveElements = document.querySelectorAll('a, .btn');
+        const interactiveElements = document.querySelectorAll('a, .btn, .lang-btn');
         interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => cursorDot.style.transform = 'translate(-50%, -50%) scale(1)');
-            el.addEventListener('mouseleave', () => cursorDot.style.transform = 'translate(-50%, -50%) scale(1)');
+            el.addEventListener('mouseenter', () => { /* Future hover effect logic here */ });
+            el.addEventListener('mouseleave', () => { /* Future hover effect logic here */ });
         });
+
+        setupCursor();
     }
 });
+
+feather.replace();

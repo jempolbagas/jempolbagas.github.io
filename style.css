@@ -230,7 +230,7 @@ section { padding: calc(var(--spacing-unit) * 4) 0; }
     font-weight: 700;
     font-size: 1rem;
     text-decoration: none;
-    cursor: pointer;
+    cursor: none;
     transition: all 0.3s ease; /* Use 'all' for smoother transitions */
     margin: 0 0.5rem;
 }
@@ -269,7 +269,7 @@ section { padding: calc(var(--spacing-unit) * 4) 0; }
 .hero-title { font-family: var(--font-primary); font-size: 4rem; line-height: 1.1; margin-bottom: 0.5rem; }
 .hero-tagline { font-size: 1.25rem; color: var(--color-text-secondary); margin-top: var(--spacing-unit); }
 .hero-socials { display: flex; gap: calc(var(--spacing-unit) * 1.5); margin-top: var(--spacing-unit); }
-.hero-socials .social-icon svg { width: 32px; height: 32px; }
+.hero-socials .social-icon svg { width: 35px; height: 35px; }
 
 /* About Section */
 #about { background-color: rgba(0, 0, 0, 0.1); }
@@ -278,10 +278,10 @@ section { padding: calc(var(--spacing-unit) * 4) 0; }
 .about-content strong {color: var(--color-accent-start); font-weight: 500;}
 
 /* Services Section */
-.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-unit); }
+.services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--spacing-unit); }
 .service-card { text-align: center; }
 .service-icon { width: 60px; height: 60px; margin: 0 auto 1rem; background-color: rgba(0, 255, 180, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-.service-icon svg { width: 28px; height: 28px; color: var(--color-accent-start); }
+.service-icon svg { width: 28px; height: 28px; color: var(--color-accent-start); stroke: var(--color-accent-start); stroke-width: "5"; stroke-linecap:"round"; stroke-linejoin:"round"}
 .service-title { font-family: var(--font-primary); font-size: 1.5rem; margin-bottom: 0.5rem; }
 .service-description { color: var(--color-text-secondary); font-size: 1rem; opacity: 0.9; }
 
@@ -344,7 +344,7 @@ section { padding: calc(var(--spacing-unit) * 4) 0; }
 }
 
 /* ==========================================================================
-   Phase B (Revised): The Comet Cursor
+   Phase C: The Elastic String Cursor
    ========================================================================== */
 
 /* 1. Hide the native cursor */
@@ -352,24 +352,19 @@ body, a, .btn {
     cursor: none;
 }
 
-/* 2. Style the cursor elements */
-.cursor-dot, .cursor-trail {
+/* 2. Style the SVG cursor element */
+.elastic-cursor {
     position: fixed;
     top: 0;
     left: 0;
-    pointer-events: none;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
+    pointer-events: none; /* The cursor should not block clicks */
     z-index: 9999;
 }
 
-.cursor-dot {
-    width: 24px;
-    height: 24px;
-    background-color: var(--color-accent-end);
-}
-
-.cursor-trail {
-    background-image: linear-gradient(90deg, var(--color-accent-start), var(--color-accent-end));
-    /* The size and opacity will be set by JavaScript */
+/* 3. Style the path inside the SVG */
+.elastic-cursor path {
+    fill: var(--color-accent-start);
+    /* stroke: var(--color-background); A stroke helps define the shape */
+    /* stroke-width: 2px; */
+    transition: fill 0.2s ease; /* Smooth transition for hover effects */
 }
