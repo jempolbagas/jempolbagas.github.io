@@ -1,7 +1,7 @@
 // script.js
 
 document.addEventListener('DOMContentLoaded', function() {
-
+    gsap.set('.hero-content', { opacity: 0, scale: 0.95 });
     document.documentElement.style.cursor = 'none';
     // ==========================================================
     // INTERACTIVE CONSTELLATION CANVAS
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ScrollTrigger.refresh();
 
         const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 0.8 } });
-        tl.from('.hero-content', { opacity: 0, scale: 0.95, duration: 0.5 })
+        tl.to('.hero-content', { opacity: 1, scale: 1, duration: 0.5 })
           .from('.hero-image', { opacity: 0, scale: 0.9, y: -30 }, "-=0.3")
           .from('.hero-title', { opacity: 0, y: 20 }, "-=0.3")
           .from('.hero-tagline', { opacity: 0, y: 20 }, "-=0.5")
