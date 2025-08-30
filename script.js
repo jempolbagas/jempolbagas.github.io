@@ -207,6 +207,18 @@ document.addEventListener('DOMContentLoaded', function() {
             scrollTrigger: { trigger: '.services-grid', start: 'top 80%', toggleActions: 'play none none none' }
         });
 
+        gsap.from('.project-showcase-card', {
+            opacity: 0,
+            y: 50,
+            duration: 0.8,
+            stagger: 0.3,
+            scrollTrigger: {
+                trigger: '.projects-grid',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            }
+        });
+
         gsap.from('.skills-column', {
             opacity: 0, x: -50, duration: 0.8,
             scrollTrigger: { trigger: '.skills-grid', start: 'top 80%', toggleActions: 'play none none none' }
@@ -426,5 +438,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     mainLoop();
 });
-
-feather.replace();
