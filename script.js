@@ -131,97 +131,6 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCanvas();
     }
 
-    // ==========================================================
-    // SUBTLE ANIMATED CONSTELLATION BACKGROUND
-    // ==========================================================
-    const bgCanvas = document.getElementById('background-canvas');
-    let bgCtx;
-    let bgParticles = [];
-    const bgLineMaxDistance = 150;
-
-    function setupBackgroundCanvas() {
-        if (!bgCanvas) return;
-        bgCtx = bgCanvas.getContext('2d');
-
-        function resizeBgCanvas() {
-            bgCanvas.width = window.innerWidth;
-            bgCanvas.height = window.innerHeight;
-        }
-        resizeBgCanvas();
-
-        class BackgroundParticle {
-            constructor() {
-                this.x = Math.random() * bgCanvas.width;
-                this.y = Math.random() * bgCanvas.height;
-                this.size = Math.random() * 1.2 + 0.3;
-                this.vx = (Math.random() - 0.5) * 0.2;
-                this.vy = (Math.random() - 0.5) * 0.2;
-                this.opacity = Math.random() * 0.3 + 0.1;
-                this.color = `rgba(0, 255, 180, ${this.opacity})`;
-            }
-
-            draw() {
-                bgCtx.beginPath();
-                bgCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                bgCtx.fillStyle = this.color;
-                bgCtx.fill();
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                if (this.x < 0 || this.x > bgCanvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > bgCanvas.height) this.vy *= -1;
-            }
-        }
-
-        function initBg() {
-            bgParticles = [];
-            const numberOfParticles = (bgCanvas.width * bgCanvas.height) / 12000;
-            for (let i = 0; i < numberOfParticles; i++) {
-                bgParticles.push(new BackgroundParticle());
-            }
-        }
-
-        window.addEventListener('resize', () => {
-            resizeBgCanvas();
-            initBg();
-        });
-
-        initBg();
-    }
-
-    function updateBackgroundCanvas() {
-        if (!bgCtx) return;
-
-        bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
-        for (const particle of bgParticles) {
-            particle.update();
-            particle.draw();
-        }
-
-        for (let i = 0; i < bgParticles.length; i++) {
-            for (let j = i + 1; j < bgParticles.length; j++) {
-                const p1 = bgParticles[i];
-                const p2 = bgParticles[j];
-                const dx = p1.x - p2.x;
-                const dy = p1.y - p2.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < bgLineMaxDistance) {
-                    const lineOpacity = 1 - (distance / bgLineMaxDistance);
-                    bgCtx.beginPath();
-                    bgCtx.moveTo(p1.x, p1.y);
-                    bgCtx.lineTo(p2.x, p2.y);
-                    bgCtx.strokeStyle = `rgba(0, 255, 180, ${lineOpacity * 0.15})`;
-                    bgCtx.lineWidth = 0.5;
-                    bgCtx.stroke();
-                }
-            }
-        }
-    }
-
     const preloader = document.getElementById('preloader');
     const langButtons = document.querySelectorAll('.lang-btn');
     const bloomParticle = document.querySelector('.bloom-particle');
@@ -522,14 +431,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (canvas) {
             updateCanvas();
         }
-        if (bgCanvas) {
-            updateBackgroundCanvas();
-        }
         if (!isTouchDevice) {
             updateCursor();
         }
         requestAnimationFrame(mainLoop);
     }
-    setupBackgroundCanvas();
     mainLoop();
 });
